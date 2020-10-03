@@ -14,7 +14,7 @@ def fetch_status(id):
     global covid_cache
     try:
         if id in covid_cache.keys():
-            if int(time.time())-covid_cache[id]['timestamp'] < 3600:
+            if time.time()-covid_cache[id]['timestamp'] < 3600:
                 return True
 
         r = requests.get('https://tracacovid.akamaized.net/data.csv')
@@ -32,7 +32,7 @@ def fetch_status(id):
         positius = int(m.group(8))+int(m.group(9))+int(m.group(10))
 
         covid_cache[id] =   {
-                                'timestamp': int(time.time()),
+                                'timestamp': time.time(),
                                 'ultim_update': ultim_update,
                                 'estat_centre': estat_centre,
                                 'groups_confinats': groups_confinats,
